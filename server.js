@@ -21,11 +21,15 @@ app.post('/', async (req, res) => {
     const response = await axios.get(url);
     const weather = {
       city: response.data.name,
-      temperature: response.data.main.temp
+      country: response.data.sys.country,
+      temperature: response.data.main.temp,
+      description: response.data.weather[0].description,
+      humidity: response.data.main.humidity,
+      wind: response.data.wind.speed
     };
     res.render('index', { weather, error: null });
   } catch (error) {
-    res.render('index', { weather: null, error: 'City not found' });
+    res.render('index', { weather: null, error: 'City not found or invalid' });
   }
 });
 

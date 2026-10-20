@@ -6,6 +6,26 @@
     <title>Weathera</title>
 </head>
 <body>
-    
+    <div class="container">
+        <h2>Weather Information</h2>
+        <form action="/" method="POST">
+            <input type="text" name="city" placeholder="Enter city name" required>
+            <button type="submit">Get Weather</button>
+        </form>
+
+        <% if (weather) { %>
+            <div class="weatherInfo">
+                <h3>Weather in <%= weather.city %>, <%= weather.country %></h3>
+                <p>Temperature: <%= weather.temperature %>°C</p>
+                <p>Description: <%= weather.description %></p>
+                <p>Humidity: <%= weather.humidity %>%</p>
+                <p>Wind speed: <%= weather.wind %> m/s</p>
+            </div>
+        <% } %>
+
+        <% if (error) { %>
+            <p class="error"><%= error %></p>
+        <% } %>
+    </div>
 </body>
 </html>

@@ -25,4 +25,7 @@ body{
     font-weight: 400;
     font-style: normal;
     color: #FFFFFF;
+    padding: 5px;
+    margin-left: 10px;
+    margin-top: 10px;
 }

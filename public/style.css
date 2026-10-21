@@ -7,6 +7,7 @@ body{
     margin: 0;
     padding: 0;
     height: 100%;
+    color: #FCFCF8;
 }
 
 .header{
@@ -15,7 +16,7 @@ body{
     background-color: rgb(208, 246, 255);
     display: flex;
     flex-direction: column;
-    background-image: url("/background-sky.webp");
+    background-image: url("images/background-sky.webp");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -57,6 +58,11 @@ body{
     border-radius: 15px;
     margin-top: 190px;
     outline: none;
+}
+
+.container{
+    padding: 20px 50px;
+    background-color: #59C2EE;
 }
 
 footer{

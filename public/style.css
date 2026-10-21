@@ -1,23 +1,33 @@
 :root {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
 }
 
 body{
     background-color: #FCFCF8;
+    margin: 0;
+    padding: 0;
+    height: 100%;
 }
 
 .header{
     width: 100vw;
     height: 500px;
-    background-color: red;
+    background-color: rgb(208, 246, 255);
+    display: flex;
+    flex-direction: column;
+    background-image: url("images/background-sky.webp");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.123);
 }
 
 #Title-container{
     width: 100%;
-    aling-content: center;
+    align-content: top;
     justify-content: left;
+    z-index: 2;
+    flex: 1;
 }
 
 #title{
@@ -28,4 +38,38 @@ body{
     padding: 5px;
     margin-left: 10px;
     margin-top: 10px;
+}
+
+#Input-container{
+    flex: 3;
+    z-index: 2;
+    display: flex;
+    width: 100%;
+    align-content: center;
+    justify-content: center;
+}
+
+.text-input{
+    border: none;
+    padding: 8px;
+    padding-left: 15px;
+    font-size: 18px;
+    border-radius: 15px;
+    margin-top: 190px;
+    outline: none;
+}
+
+footer{
+    display: flex;
+    background-color: #59C2EE;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    height: 200px;
+}
+
+#copyright{
+    color: #FCFCF8;
+    padding: 5px;
+    margin-left: 15px;
 }

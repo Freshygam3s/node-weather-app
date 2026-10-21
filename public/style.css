@@ -15,7 +15,7 @@ body{
     background-color: rgb(208, 246, 255);
     display: flex;
     flex-direction: column;
-    background-image: url("images/background-sky.webp");
+    background-image: url("/background-sky.webp");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

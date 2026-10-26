@@ -27,6 +27,16 @@
             <div class="weatherInfo">
                 <h3>Weather in <%= weather.city %>, <%= weather.country %></h3>
                 <p>Temperature: <%= weather.temperature %>°C</p>
+                <p>Min Temperature: <%= weather.MinTemp %>°C</p>
+                <p>Max Temperature: <%= weather.MaxTemp %>°C</p>
+                <p>Feels Like: <%= weather.feelsLike %>°C</p>
+                <p>Pressure: <%= weather.pressure %> hPa</p>
+                <% if (weather.visibility >= 10000) { %>
+                    <p>Visibility: infinite</p>
+                <% } else { %>
+                    <p>Visibility: <%= weather.visibility %> meters</p>
+                <% } %>
+                <p>Wind Direction: <%= weather.windDeg %>°</p>
                 <p>Description: <%= weather.description %></p>
                 <p>Humidity: <%= weather.humidity %>%</p>
                 <p>Wind speed: <%= weather.wind %> m/s</p>

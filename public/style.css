@@ -96,9 +96,11 @@ footer{
 
 .weatherInfo{
     flex: 2;
+    padding: 10px;
 }
 
 #map{
     flex: 1;
+    padding: 10px;
 }
 

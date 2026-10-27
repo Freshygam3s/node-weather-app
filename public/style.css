@@ -88,3 +88,9 @@ footer{
     padding: 5px;
     margin-left: 15px;
 }
+
+#container{
+    display: flex;
+    flex-direction: row;
+}
+

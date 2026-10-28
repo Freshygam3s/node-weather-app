@@ -3,108 +3,100 @@
 }
 
 html {
-    overflow: scroll;
     overflow-x: hidden;
+    scrollbar-width: none;
+    -webkit-text-size-adjust: 100%;
 }
+
 ::-webkit-scrollbar {
-    width: 0;  
-    background: transparent; 
+    width: 0;
+    background: transparent;
 }
 
-
-body{
-    background-color: #59C2EE;
+body {
     margin: 0;
     padding: 0;
-    height: 100%;
-    color: #FCFCF8;
-}
-
-.header{
-    width: 100%;
-    height: 500px;
-    background-color: #59C2EE;
+    min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
     flex-direction: column;
-    background-image: url("images/background-sky.webp");
+    background-color: #59C2EE;
+    color: #f8f9fc;
+    overflow-wrap: anywhere;
+}
+
+img, video, canvas {
+    max-width: 100%;
+    height: auto;
+}
+
+.header {
+    position: relative;
+    width: 100%;
+    height: 80vh;
+    height: 80svh;
+    min-height: 360px;
+    max-height: 900px;
+    display: flex;
+    flex-direction: column;
+    background-color: #59C2EE;
+    background-image:
+        linear-gradient(to bottom, rgba(89, 194, 238, 0) 50%, #59C2EE 100%),
+        url("/bg.webp");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 }
 
-#Title-container{
-    width: 100%;
-    align-content: top;
-    justify-content: left;
-    z-index: 2;
+#Title-container {
     flex: 1;
+    width: 100%;
+    z-index: 2;
 }
 
-#title{
+#title {
+    margin: clamp(8px, 2vw, 20px) 0 0 clamp(8px, 2vw, 20px);
+    padding: 5px;
     font-family: "Special Gothic Expanded One", sans-serif;
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
     font-weight: 400;
     font-style: normal;
-    color: #FFFFFF;
-    padding: 5px;
-    margin-left: 10px;
-    margin-top: 10px;
+    color: #59C2EE;
     text-transform: uppercase;
 }
 
-#Input-container{
+#Input-container {
     flex: 3;
     z-index: 2;
     display: flex;
-    width: 100%;
-    align-content: center;
     justify-content: center;
+    align-items: flex-end;
+    padding: 0 16px clamp(40px, 12vh, 140px);
 }
 
-.text-input{
+#Input-container form {
+    width: 100%;
+    max-width: 480px;
+}
+
+.text-input {
+    display: block;
+    width: 100%;
+    padding: 8px 8px 8px 15px;
     border: none;
-    padding: 8px;
-    padding-left: 15px;
-    font-size: 24px;
     border-radius: 5px;
-    margin-top: 190px;
     outline: none;
-}
-
-#map{
-    height: 400px;
-    width: 100%;
-    border-radius: 12px;
-    margin-top: 20px;
-}
-
-footer{
-    display: flex;
-    background-color: #59C2EE;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-    height: 200px;
-    justify-content: left;
-    align-items: end;
-}
-
-#copyright{
-    color: #FCFCF8;
-    font-size: 20px;
-    padding: 5px;
-    margin-left: 15px;
+    font-size: clamp(1rem, 4vw, 1.5rem);
 }
 
 .container {
     display: flex;
     flex-direction: row-reverse;
     gap: 20px;
-
     width: calc(100% - 40px);
     max-width: 1400px;
     margin: 30px auto;
     padding: 25px;
-
     background-color: white;
     color: black;
     border-radius: 5px;
@@ -119,11 +111,12 @@ footer{
 .weatherInfo h3 {
     margin-top: 0;
     margin-bottom: 20px;
+    font-size: clamp(1.1rem, 3vw, 1.5rem);
 }
 
 .weatherGrid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
     gap: 15px;
 }
 
@@ -142,25 +135,78 @@ footer{
     border-radius: 12px;
 }
 
-@media (max-width: 700px) {
+.error {
+    margin: 0 auto;
+    text-align: center;
+}
+
+footer {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    width: 100%;
+    min-height: 120px;
+    margin-top: auto;
+    background-color: #59C2EE;
+}
+
+#copyright {
+    margin: 0 0 0 15px;
+    padding: 5px;
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    color: #FCFCF8;
+}
+
+@media (max-width: 900px) {
     .container {
         flex-direction: column;
-        width: calc(100% - 24px);
-        padding: 15px;
+        gap: 10px;
     }
 
     .weatherInfo,
     #map {
-        width: 100%;
         flex: none;
+        width: 100%;
     }
 
-    .weatherGrid {
-        grid-template-columns: 1fr;
+    #map {
+        height: 350px;
+        margin-top: 0;
+    }
+}
+
+@media (max-width: 600px) {
+    .container {
+        width: calc(100% - 24px);
+        margin: 20px auto;
+        padding: 12px;
+    }
+
+    .weatherInfo {
+        padding: 5px;
+    }
+
+    .weatherGrid p {
+        padding: 12px;
     }
 
     #map {
         height: 300px;
-        margin-top: 0;
+    }
+
+    .header {
+        background-size: 100% 100%, auto 135%;
+        background-position: center, center bottom;
+    }
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+    .header {
+        height: auto;
+        min-height: 300px;
+    }
+
+    #Input-container {
+        padding-bottom: 30px;
     }
 }

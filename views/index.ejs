@@ -23,26 +23,38 @@
         </div>
     </div>
     <div class="container">
-
         <% if (weather) { %>
+
             <div class="weatherInfo">
-                <h3>Weather in <span id="place"><%= weather.city %>, <%= weather.country %></span></h3>
-                <p>Temperature: <span id="temperature"><%= weather.temperature %></span>°C</p>
-                <p>Min Temperature: <span id="MinTemp"><%= weather.MinTemp %></span>°C</p>
-                <p>Max Temperature: <span id="MaxTemp"><%= weather.MaxTemp %></span>°C</p>
-                <p>Feels Like: <span id="feelsLike"><%= weather.feelsLike %></span>°C</p>
-                <p>Pressure: <span id="pressure"><%= weather.pressure %></span> hPa</p>
-                <% if (weather.visibility >= 10000) { %>
-                    <p>Visibility: <span id="visibility">infinite</span></p>
-                <% } else { %>
-                    <p>Visibility: <span id="visibility"><%= weather.visibility %> meters</span></p>
-                <% } %>
-                <p>Wind Direction: <span id="windDeg"><%= weather.windDeg %></span>°</p>
-                <p>Description: <span id="description"><%= weather.description %></span></p>
-                <p>Humidity: <span id="humidity"><%= weather.humidity %></span>%</p>
-                <p>Wind speed: <span id="wind"><%= weather.wind %></span> m/s</p>
+                <h3>
+                    Weather in
+                    <span id="place">
+                        <%= weather.city %>, <%= weather.country %>
+                    </span>
+                </h3>
+
+                <div class="weatherGrid">
+                    <p>Temperature: <span id="temperature"><%= weather.temperature %></span>°C</p>
+                    <p>Min Temperature: <span id="MinTemp"><%= weather.MinTemp %></span>°C</p>
+                    <p>Max Temperature: <span id="MaxTemp"><%= weather.MaxTemp %></span>°C</p>
+                    <p>Feels Like: <span id="feelsLike"><%= weather.feelsLike %></span>°C</p>
+                    <p>Pressure: <span id="pressure"><%= weather.pressure %></span> hPa</p>
+
+                    <% if (weather.visibility >= 10000) { %>
+                        <p>Visibility: <span id="visibility">infinite</span></p>
+                    <% } else { %>
+                        <p>Visibility: <span id="visibility"><%= weather.visibility %> meters</span></p>
+                    <% } %>
+
+                    <p>Wind Direction: <span id="windDeg"><%= weather.windDeg %></span>°</p>
+                    <p>Description: <span id="description"><%= weather.description %></span></p>
+                    <p>Humidity: <span id="humidity"><%= weather.humidity %></span>%</p>
+                    <p>Wind speed: <span id="wind"><%= weather.wind %></span> m/s</p>
+                </div>
             </div>
+
             <div id="map"></div>
+
             <script>
                 const map = L.map('map').setView([<%= weather.lat %>, <%= weather.lon %>], 11);
 
@@ -93,6 +105,7 @@
         <% if (error) { %>
             <p class="error"><%= error %></p>
         <% } %>
+
     </div>
 
     <footer>

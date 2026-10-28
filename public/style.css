@@ -2,8 +2,18 @@
     box-sizing: border-box;
 }
 
+html {
+    overflow: scroll;
+    overflow-x: hidden;
+}
+::-webkit-scrollbar {
+    width: 0;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}
+
+
 body{
-    background-color:  #59C2EE;
+    background-color: #59C2EE;
     margin: 0;
     padding: 0;
     height: 100%;
@@ -38,6 +48,7 @@ body{
     padding: 5px;
     margin-left: 10px;
     margin-top: 10px;
+    text-transform: uppercase;
 }
 
 #Input-container{
@@ -53,15 +64,10 @@ body{
     border: none;
     padding: 8px;
     padding-left: 15px;
-    font-size: 18px;
-    border-radius: 15px;
+    font-size: 24px;
+    border-radius: 5px;
     margin-top: 190px;
     outline: none;
-}
-
-.container{
-    padding: 20px 50px;
-    background-color: #59C2EE;
 }
 
 #map{
@@ -84,6 +90,7 @@ footer{
 
 #copyright{
     color: #FCFCF8;
+    font-size: 20px;
     padding: 5px;
     margin-left: 15px;
 }
@@ -94,20 +101,37 @@ footer{
     gap: 20px;
 
     width: calc(100% - 40px);
-    max-width: 1000px;
+    max-width: 1400px;
     margin: 30px auto;
     padding: 25px;
 
     background-color: white;
     color: black;
-    border-radius: 15px;
-    box-sizing: border-box;
+    border-radius: 5px;
 }
 
 .weatherInfo {
     flex: 2;
     min-width: 0;
     padding: 10px;
+}
+
+.weatherInfo h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.weatherGrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 15px;
+}
+
+.weatherGrid p {
+    margin: 0;
+    padding: 15px;
+    background-color: #f0f8fc;
+    border-radius: 8px;
 }
 
 #map {
@@ -131,9 +155,12 @@ footer{
         flex: none;
     }
 
+    .weatherGrid {
+        grid-template-columns: 1fr;
+    }
+
     #map {
         height: 300px;
         margin-top: 0;
     }
 }
-

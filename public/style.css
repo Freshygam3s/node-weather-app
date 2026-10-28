@@ -13,7 +13,7 @@ body{
 .header{
     width: 100%;
     height: 500px;
-    background-color: rgb(208, 246, 255);
+    background-color: #59C2EE;
     display: flex;
     flex-direction: column;
     background-image: url("images/background-sky.webp");

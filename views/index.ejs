@@ -51,6 +51,18 @@
                     <p>Humidity: <span id="humidity"><%= weather.humidity %></span>%</p>
                     <p>Wind speed: <span id="wind"><%= weather.wind %></span> m/s</p>
                 </div>
+
+                <% if (forecast) { %>
+    <div class="forecast">
+        <% forecast.forEach(day => { %>
+            <div class="forecastDay">
+                <p><b><%= day.day %></b></p>
+                <p><%= day.description %></p>
+                <p><%= Math.round(day.max) %>° / <%= Math.round(day.min) %>°</p>
+            </div>
+        <% }) %>
+    </div>
+<% } %>
             </div>
 
             <div id="map"></div>

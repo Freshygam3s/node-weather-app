@@ -9,6 +9,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="icon" href="/Icon.jpeg" type="image/x-icon">
     <title>Weathera</title>
 </head>
 <body>
@@ -26,46 +28,50 @@
         <% if (weather) { %>
 
             <div class="weatherInfo">
-                <h3>
-                    Weather in
-                    <span id="place">
-                        <%= weather.city %>, <%= weather.country %>
-                    </span>
-                </h3>
-
-                <div class="weatherGrid">
-                    <p>Temperature: <span id="temperature"><%= weather.temperature %></span>°C</p>
-                    <p>Min Temperature: <span id="MinTemp"><%= weather.MinTemp %></span>°C</p>
-                    <p>Max Temperature: <span id="MaxTemp"><%= weather.MaxTemp %></span>°C</p>
-                    <p>Feels Like: <span id="feelsLike"><%= weather.feelsLike %></span>°C</p>
-                    <p>Pressure: <span id="pressure"><%= weather.pressure %></span> hPa</p>
-
-                    <% if (weather.visibility >= 10000) { %>
-                        <p>Visibility: <span id="visibility">infinite</span></p>
-                    <% } else { %>
-                        <p>Visibility: <span id="visibility"><%= weather.visibility %> meters</span></p>
-                    <% } %>
-
-                    <p>Wind Direction: <span id="windDeg"><%= weather.windDeg %></span>°</p>
-                    <p>Description: <span id="description"><%= weather.description %></span></p>
-                    <p>Humidity: <span id="humidity"><%= weather.humidity %></span>%</p>
-                    <p>Wind speed: <span id="wind"><%= weather.wind %></span> m/s</p>
+                <div class="weatherHeader">
+                    <img id="weatherIcon" src="https://openweathermap.org/img/wn/<%= weather.icon %>@2x.png" alt="<%= weather.description %>">
+                    <h3>
+                        Weather in
+                        <span id="place">
+                            <%= weather.city %>, <%= weather.country %>
+                        </span>
+                    </h3>
                 </div>
 
-                <% if (forecast) { %>
-                    <div class="forecast">
-                        <% forecast.forEach(day => { %>
-                            <div class="forecastDay">
-                                <p><b><%= day.day %></b></p>
-                                <p><%= day.description %></p>
-                                <p><%= Math.round(day.maxTemp) %>° / <%= Math.round(day.minTemp) %>°</p>
-                            </div>
-                        <% }) %>
-                    </div>
-                <% } %>
+                <div class="weatherGrid">
+                    <p><i class="fa-solid fa-temperature-half"></i><span><span class="label">Temperature</span><span class="value"><span id="temperature"><%= weather.temperature %></span>°C</span></span></p>
+                    <p><i class="fa-solid fa-temperature-low"></i><span><span class="label">Min Temperature</span><span class="value"><span id="MinTemp"><%= weather.MinTemp %></span>°C</span></span></p>
+                    <p><i class="fa-solid fa-temperature-high"></i><span><span class="label">Max Temperature</span><span class="value"><span id="MaxTemp"><%= weather.MaxTemp %></span>°C</span></span></p>
+                    <p><i class="fa-solid fa-person"></i><span><span class="label">Feels Like</span><span class="value"><span id="feelsLike"><%= weather.feelsLike %></span>°C</span></span></p>
+                    <p><i class="fa-solid fa-gauge"></i><span><span class="label">Pressure</span><span class="value"><span id="pressure"><%= weather.pressure %></span> hPa</span></span></p>
+
+                    <% if (weather.visibility >= 10000) { %>
+                        <p><i class="fa-solid fa-eye"></i><span><span class="label">Visibility</span><span class="value" id="visibility">infinite</span></span></p>
+                    <% } else { %>
+                        <p><i class="fa-solid fa-eye"></i><span><span class="label">Visibility</span><span class="value" id="visibility"><%= weather.visibility %> meters</span></span></p>
+                    <% } %>
+
+                    <p><i class="fa-solid fa-compass"></i><span><span class="label">Wind Direction</span><span class="value"><span id="windDeg"><%= weather.windDeg %></span>° <span id="windDir"><%= weather.windDir %></span></span></span></p>
+                    <p><i class="fa-solid fa-cloud"></i><span><span class="label">Description</span><span class="value" id="description"><%= weather.description %></span></span></p>
+                    <p><i class="fa-solid fa-droplet"></i><span><span class="label">Humidity</span><span class="value"><span id="humidity"><%= weather.humidity %></span>%</span></span></p>
+                    <p><i class="fa-solid fa-wind"></i><span><span class="label">Wind Speed</span><span class="value"><span id="wind"><%= weather.wind %></span> m/s</span></span></p>
+                </div>
             </div>
 
             <div id="map"></div>
+
+            <% if (forecast) { %>
+                <div class="forecast">
+                    <% forecast.forEach(day => { %>
+                        <div class="forecastDay">
+                            <p><b><%= day.day %></b></p>
+                            <img src="https://openweathermap.org/img/wn/<%= day.icon %>@2x.png" alt="<%= day.description %>">
+                            <p><%= day.description %></p>
+                            <p><%= Math.round(day.maxTemp) %>° / <%= Math.round(day.minTemp) %>°</p>
+                        </div>
+                    <% }) %>
+                </div>
+            <% } %>
 
             <script>
                 const map = L.map('map').setView([<%= weather.lat %>, <%= weather.lon %>], 11);
@@ -90,9 +96,12 @@
                     document.getElementById('pressure').textContent = w.pressure;
                     document.getElementById('visibility').textContent = w.visibility >= 10000 ? 'infinite' : `${w.visibility} meters`;
                     document.getElementById('windDeg').textContent = w.windDeg;
+                    document.getElementById('windDir').textContent = w.windDir;
                     document.getElementById('description').textContent = w.description;
                     document.getElementById('humidity').textContent = w.humidity;
                     document.getElementById('wind').textContent = w.wind;
+                    document.getElementById('weatherIcon').src = `https://openweathermap.org/img/wn/${w.icon}@2x.png`;
+                    document.getElementById('weatherIcon').alt = w.description;
                     return place;
                 }
 

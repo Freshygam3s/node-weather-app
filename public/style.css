@@ -25,7 +25,7 @@ body {
     overflow-wrap: anywhere;
 }
 
-img, video, canvas {
+img {
     max-width: 100%;
     height: auto;
 }
@@ -92,6 +92,7 @@ img, video, canvas {
 .container {
     display: flex;
     flex-direction: row-reverse;
+    flex-wrap: wrap;
     gap: 20px;
     width: calc(100% - 40px);
     max-width: 1400px;
@@ -109,32 +110,76 @@ img, video, canvas {
 }
 
 .weatherInfo h3 {
-    margin-top: 0;
-    margin-bottom: 20px;
+    margin: 0;
     font-size: clamp(1.1rem, 3vw, 1.5rem);
+}
+
+.weatherHeader {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+#weatherIcon {
+    width: 70px;
+    height: 70px;
+    flex-shrink: 0;
+    background-color: #59C2EE;
+    border-radius: 50%;
 }
 
 .weatherGrid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+    grid-auto-rows: 1fr;
     gap: 15px;
 }
 
 .weatherGrid p {
+    display: flex;
+    align-items: center;
+    gap: 12px;
     margin: 0;
     padding: 15px;
     background-color: #f0f8fc;
     border-radius: 8px;
 }
 
+.weatherGrid i {
+    width: 1.5em;
+    flex-shrink: 0;
+    font-size: 1.4rem;
+    text-align: center;
+    color: #59C2EE;
+}
+
+.weatherGrid .label {
+    display: block;
+    font-size: 0.85rem;
+    color: #555;
+}
+
+.weatherGrid .value {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
 .forecast {
+    flex: none;
+    width: 100%;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+    grid-template-columns: repeat(7, minmax(110px, 1fr));
     gap: 15px;
-    margin-top: 15px;
+    overflow-x: auto;
 }
 
 .forecastDay {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     padding: 15px;
     background-color: #f0f8fc;
     border-radius: 8px;
@@ -143,6 +188,14 @@ img, video, canvas {
 
 .forecastDay p {
     margin: 0 0 6px;
+}
+
+.forecastDay img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 6px;
+    background-color: #59C2EE;
+    border-radius: 50%;
 }
 
 #map {
@@ -208,7 +261,7 @@ footer {
         padding: 12px;
     }
 
-    .forecastDay p {
+    .forecastDay {
         padding: 12px;
     }
 

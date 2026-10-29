@@ -24,6 +24,11 @@ app.get('/', async (req, res) => {
   }
 });
 
+function degToCompass(deg) {
+  const directions = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
+  return directions[Math.round(deg / 45) % 8];
+}
+
 function toWeather(data) {
   return {
     city: data.name,
@@ -34,8 +39,10 @@ function toWeather(data) {
     pressure: data.main.pressure,
     visibility: data.visibility,
     windDeg: data.wind.deg,
+    windDir: degToCompass(data.wind.deg),
     temperature: data.main.temp,
     description: data.weather[0].description,
+    icon: data.weather[0].icon,
     humidity: data.main.humidity,
     wind: data.wind.speed,
     lat: data.coord.lat,
@@ -55,6 +62,19 @@ function describeCode(code) {
   return 'Thunderstorm';
 }
 
+function codeToIcon(code) {
+  if (code === 0) return '01d';
+  if (code <= 2) return '02d';
+  if (code === 3) return '04d';
+  if (code <= 48) return '50d';
+  if (code <= 57) return '09d';
+  if (code <= 67) return '10d';
+  if (code <= 77) return '13d';
+  if (code <= 82) return '09d';
+  if (code <= 86) return '13d';
+  return '11d';
+}
+
 async function getForecast(lat, lon) {
   const response = await axios.get('https://api.open-meteo.com/v1/forecast', {
     params: {
@@ -70,7 +90,8 @@ async function getForecast(lat, lon) {
     day: new Date(date).toLocaleDateString('en-US', { weekday: 'short' }),
     minTemp: daily.temperature_2m_min[i],
     maxTemp: daily.temperature_2m_max[i],
-    description: describeCode(daily.weathercode[i])
+    description: describeCode(daily.weathercode[i]),
+    icon: codeToIcon(daily.weathercode[i])
   }));
 }
 app.post('/', async (req, res) => {

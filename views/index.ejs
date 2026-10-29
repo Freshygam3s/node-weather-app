@@ -105,6 +105,19 @@
                     return place;
                 }
 
+                function showForecast(days) {
+                    const forecast = document.querySelector('.forecast');
+                    if (!forecast || !days) return;
+                    forecast.innerHTML = days.map(day => `
+                        <div class="forecastDay">
+                            <p><b>${day.day}</b></p>
+                            <img src="https://openweathermap.org/img/wn/${day.icon}@2x.png" alt="${day.description}">
+                            <p>${day.description}</p>
+                            <p>${Math.round(day.maxTemp)}° / ${Math.round(day.minTemp)}°</p>
+                        </div>
+                    `).join('');
+                }
+
                 map.on('click', async (e) => {
                     const { lat, lng } = e.latlng.wrap();
                     marker.setLatLng(e.latlng);
@@ -115,6 +128,7 @@
                         const data = await res.json();
                         if (!res.ok) throw new Error(data.error);
                         const place = showWeather(data);
+                        showForecast(data.forecast);
                         marker.setPopupContent(`<b>${place}</b><br>${data.temperature}°C, ${data.description}`);
                     } catch (err) {
                         marker.setPopupContent('Could not get weather here');

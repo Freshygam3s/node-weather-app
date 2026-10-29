@@ -116,7 +116,9 @@ app.get('/weather', async (req, res) => {
 
   try {
     const response = await axios.get(url);
-    res.json(toWeather(response.data));
+    const weather = toWeather(response.data);
+    weather.forecast = await getForecast(weather.lat, weather.lon);
+    res.json(weather);
   } catch (error) {
     res.status(500).json({ error: 'Could not get weather for this point' });
   }

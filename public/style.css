@@ -127,6 +127,24 @@ img, video, canvas {
     border-radius: 8px;
 }
 
+.forecast {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.forecastDay {
+    padding: 15px;
+    background-color: #f0f8fc;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.forecastDay p {
+    margin: 0 0 6px;
+}
+
 #map {
     flex: 1;
     min-width: 0;
@@ -187,6 +205,10 @@ footer {
     }
 
     .weatherGrid p {
+        padding: 12px;
+    }
+
+    .forecastDay p {
         padding: 12px;
     }
 

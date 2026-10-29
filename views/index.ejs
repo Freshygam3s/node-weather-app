@@ -53,16 +53,16 @@
                 </div>
 
                 <% if (forecast) { %>
-    <div class="forecast">
-        <% forecast.forEach(day => { %>
-            <div class="forecastDay">
-                <p><b><%= day.day %></b></p>
-                <p><%= day.description %></p>
-                <p><%= Math.round(day.max) %>° / <%= Math.round(day.min) %>°</p>
-            </div>
-        <% }) %>
-    </div>
-<% } %>
+                    <div class="forecast">
+                        <% forecast.forEach(day => { %>
+                            <div class="forecastDay">
+                                <p><b><%= day.day %></b></p>
+                                <p><%= day.description %></p>
+                                <p><%= Math.round(day.maxTemp) %>° / <%= Math.round(day.minTemp) %>°</p>
+                            </div>
+                        <% }) %>
+                    </div>
+                <% } %>
             </div>
 
             <div id="map"></div>
